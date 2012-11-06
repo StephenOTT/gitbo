@@ -5,7 +5,7 @@ class ReposController < ApplicationController
   def api
     api_response = Octokit.repo("#{params[:github_user]}/#{params[:repo]}")
     @repo = Repo.new( :name => api_response.name,
-                      :url => api_response.url )
+                      :url => api_response.html_url )
   end
 
 
@@ -23,7 +23,7 @@ class ReposController < ApplicationController
   def show
     api_response = Octokit.repo("#{params[:github_user]}/#{params[:repo]}")
     @repo = Repo.new( :name => api_response.name,
-                      :url => api_response.url )
+                      :url => api_response.html_url )
 
     # @repo = Repo.find(params[:id])
 
