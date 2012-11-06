@@ -1,4 +1,7 @@
 Gitbo::Application.routes.draw do
+
+
+  get '/api/:github_user/:repo' => 'repos#api'
   resources :repos
 
   

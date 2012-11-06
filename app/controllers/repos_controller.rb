@@ -1,6 +1,14 @@
 class ReposController < ApplicationController
   # GET /repos
   # GET /repos.json
+
+  def api
+    api_response = Octokit.repo("#{params[:github_user]}/#{params[:repo]}")
+    @repo = Repo.new( :name => api_response.name,
+                      :url => api_response.url )
+  end
+
+
   def index
     @repos = Repo.all
 
@@ -13,12 +21,16 @@ class ReposController < ApplicationController
   # GET /repos/1
   # GET /repos/1.json
   def show
-    @repo = Repo.find(params[:id])
+    api_response = Octokit.repo("#{params[:github_user]}/#{params[:repo]}")
+    @repo = Repo.new( :name => api_response.name,
+                      :url => api_response.url )
 
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @repo }
-    end
+    # @repo = Repo.find(params[:id])
+
+    # respond_to do |format|
+    #   format.html # show.html.erb
+    #   format.json { render json: @repo }
+    # end
   end
 
   # GET /repos/new
