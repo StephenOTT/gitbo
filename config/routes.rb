@@ -1,4 +1,8 @@
 Gitbo::Application.routes.draw do
+  resources :repos
+
+  
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
