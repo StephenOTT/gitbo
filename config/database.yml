@@ -4,7 +4,7 @@
 #   Ensure the SQLite 3 gem is defined in your Gemfile
 #   gem 'sqlite3'
 development:
-  adapter: postgresql
+  adapter: sqlite3
   encoding: utf8
   database: project_development
   pool: 5
@@ -12,7 +12,7 @@ development:
   password:
 
 test: &TEST
-  adapter: postgresql
+  adapter: sqlite3
   encoding: utf8
   database: project_test
   pool: 5
