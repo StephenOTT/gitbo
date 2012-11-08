@@ -1,9 +1,10 @@
 class GithubConnection
 
+  attr_accessor :repo, :info
+
   def initialize(owner, repo)
-    @owner = owner
-    @repo = repo
-    @info = Octokit.repo("#{@owner}/#{@repo}")
+    @repo = "#{owner}/#{repo}"
+    @info = Octokit.repo(@repo)
   end
 
   def url
@@ -19,7 +20,14 @@ class GithubConnection
   end
 
   def issues
-    Octokit.list_issues("#{@owner}/#{@repo}")
+    @issues ||= Octokit.list_issues(self.repo)
   end
 
 end
+
+
+# class Issue
+
+#   def intialize(owner, repo)
+#     gh_connect = GithubConnection.(#)
+# end
