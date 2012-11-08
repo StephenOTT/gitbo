@@ -3,21 +3,19 @@
 #
 #   Ensure the SQLite 3 gem is defined in your Gemfile
 #   gem 'sqlite3'
-development:
-  adapter: sqlite3
+development: &DEVELOPMENT
+  adapter: postgresql
   encoding: utf8
   database: project_development
   pool: 5
-  username: 
+  username: Kevin
   password:
+  host: localhost
+  port: 5432
 
 test: &TEST
-  adapter: sqlite3
-  encoding: utf8
+  <<: *DEVELOPMENT
   database: project_test
-  pool: 5
-  username: 
-  password:
 
 production:
   adapter: postgresql
