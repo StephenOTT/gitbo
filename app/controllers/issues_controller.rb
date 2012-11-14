@@ -32,7 +32,6 @@ class IssuesController < ApplicationController
   def index
     @issues = Issue.all
 
-    # order('comment_count DESC').all
 
       # Get all issues
       # sorts all issues by issue.popularity
@@ -52,8 +51,10 @@ class IssuesController < ApplicationController
     @issue = Issue.find_by_repo_id_and_git_number(repo.id, params[:git_number])
 
     github_connection = GithubConnection.new(params[:owner], params[:repo], params[:git_number])
-
-    @issue.refresh(github_connection)
+    if @issue.updated?(github_connection)
+       RefreshWorker.perform_async(@issue, github_connection)
+      flash[:notice] = "Updating issue from Github, please refresh"
+    end
 
     respond_to do |format|
       format.html # show.html.erb
