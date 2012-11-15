@@ -3,6 +3,7 @@ class Issue < ActiveRecord::Base
   :git_updated_at, :state
 
   belongs_to :repo
+  has_many :comments
 
   validates :git_number, :uniqueness => { :scope => :repo_id } 
 
