@@ -51,8 +51,10 @@ class IssuesController < ApplicationController
     @issue = Issue.find_by_repo_id_and_git_number(repo.id, params[:git_number])
 
     github_connection = GithubConnection.new(params[:owner], params[:repo], params[:git_number])
+    # raise @issue.inspect
     if @issue.updated?(github_connection)
-       RefreshWorker.perform_async(@issue, github_connection)
+       RefreshIssuesWorker.perform_async(@issue, github_connection)
+       raise @issue.inspect
       flash[:notice] = "Updating issue from Github, please refresh"
     end
 
