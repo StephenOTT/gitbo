@@ -32,6 +32,7 @@ GEM
     arel (3.0.2)
     bcrypt-ruby (3.0.1)
     builder (3.0.4)
+    cancan (1.6.8)
     celluloid (0.12.3)
       facter (>= 1.6.12)
       timers (>= 1.0.0)
@@ -232,6 +233,7 @@ PLATFORMS
 
 DEPENDENCIES
   bcrypt-ruby (~> 3.0.0)
+  cancan
   coffee-rails (~> 3.2.1)
   debugger
   friendly_id

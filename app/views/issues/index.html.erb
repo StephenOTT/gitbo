@@ -17,12 +17,17 @@
 
 <% @issues.sort_by(&:popularity).reverse.each do |issue| %>
   <tr>
-    <td><%= link_to upvote_issue_path(issue.id), :method => :put do %>
-            <i class="icon-arrow-up"></i>
-        <% end %></td>
-    <td><%= link_to downvote_issue_path(issue.id), :method => :put do %>
-            <i class="icon-arrow-down"></i>
-        <% end %></td>
+    <% if current_user %>
+        <td><%= link_to upvote_issue_path(issue.id), :method => :put do %>
+                <i class="icon-arrow-up"></i>
+            <% end %></td>
+        <td><%= link_to downvote_issue_path(issue.id), :method => :put do %>
+                <i class="icon-arrow-down"></i>
+            <% end %></td>
+    <% else %> 
+        <td> <i class="icon-arrow-up"></i></td>
+        <td><i class="icon-arrow-down"></i></td>
+    <% end %>
     <td><%= link_to issue.title, owner_repo_gitnumber_path(issue.repo.owner_name, issue.repo.name, issue.git_number) %></td>
     <td><%= link_to issue.repo.name, owner_repo_path(issue.repo.owner_name, issue.repo.name) %></td>
     <td><%= issue.git_number %></td>

@@ -29,6 +29,9 @@ gem 'friendly_id'
  gem 'omniauth-github'
  gem 'omniauth-openid'
 
+#Cancan gem for authorization
+gem "cancan"
+
 group :development, :test do
   gem 'debugger'
   gem 'rspec-rails'

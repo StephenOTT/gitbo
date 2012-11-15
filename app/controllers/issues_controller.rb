@@ -7,7 +7,8 @@ class IssuesController < ApplicationController
     # raise issue.inspect
     issue.add_upvote
     issue.save
-    redirect_to :back    
+    redirect_to :back
+    authorize! :upvote, issue    
   end
 
   def downvote
@@ -15,6 +16,7 @@ class IssuesController < ApplicationController
     issue.add_downvote
     issue.save
     redirect_to :back
+    authorize! :downvote, issue
   end
 
   def repo_issues

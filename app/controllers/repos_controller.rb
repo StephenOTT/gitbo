@@ -77,7 +77,9 @@ class ReposController < ApplicationController
       flash[:error] = "Repository already exists."
       redirect_to :root
     end
-    
+    # 11.15.12 Need to doble check the logic before setting this authorization
+      # Trello task setup 
+    # authorize! :create, @repo
 
     # respond_to do |format|
     #   if @repo.save

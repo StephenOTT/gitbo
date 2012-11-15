@@ -3,6 +3,10 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_user 
 
+  def logged_in?
+    current_user
+  end
+
   private
 
   def current_user
