@@ -11,7 +11,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121114204624) do
+ActiveRecord::Schema.define(:version => 20121115164907) do
+
+  create_table "comments", :force => true do |t|
+    t.text     "body"
+    t.datetime "git_update_at"
+    t.integer  "git_number"
+    t.string   "owner_name"
+    t.string   "owner_image"
+    t.integer  "issue_id"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
 
   create_table "issues", :force => true do |t|
     t.string   "title"
