@@ -21,6 +21,7 @@ class Issue < ActiveRecord::Base
     end
   end
 
+
   def popularity
     upvote = self.upvote ||= 0
     downvote = self.downvote ||= 0
@@ -45,10 +46,10 @@ class Issue < ActiveRecord::Base
 
   def update_issue_attributes(github_connection)
     self.update_attributes( :body => github_connection.issue_body,
-                       :title => github_connection.issue_title,
-                       :comment_count => github_connection.issue_comments,
-                       :git_updated_at => github_connection.issue_git_updated_at,
-                       :state => github_connection.issue_state  )
+                            :title => github_connection.issue_title,
+                            :comment_count => github_connection.issue_comments,
+                            :git_updated_at => github_connection.issue_git_updated_at,
+                            :state => github_connection.issue_state  )
   end
 
 end
