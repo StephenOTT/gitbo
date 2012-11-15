@@ -20,6 +20,9 @@ class Issue < ActiveRecord::Base
       i.repo = Repo.find_or_create_by_name("#{repo}")
       i.save
 
+
+
+
     if i.persisted?
       github_connection.comments.each do |comment|
         Comment.create_from_github( i, comment)
