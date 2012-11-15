@@ -8,7 +8,11 @@ class User < ActiveRecord::Base
     user.name = auth["info"]["name"]
     user.nickname = auth["info"]["nickname"]
     user.email = auth["info"]["email"]
-    
+    end
   end
-end
+
+  def session_token
+    session[:token]
+  end
+  
 end
