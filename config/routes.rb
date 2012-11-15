@@ -1,5 +1,7 @@
 Gitbo::Application.routes.draw do
 
+  resources :comments
+
   resources :users
 
   #authentication through github
@@ -29,6 +31,8 @@ Gitbo::Application.routes.draw do
   require 'sidekiq/web'
 
   Gitbo::Application.routes.draw do
+  resources :comments
+
   resources :users
 
     resources :repos

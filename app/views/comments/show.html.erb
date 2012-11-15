@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Body:</b>
+  <%= @comment.body %>
+</p>
+
+<p>
+  <b>Git update at:</b>
+  <%= @comment.git_update_at %>
+</p>
+
+<p>
+  <b>Git number:</b>
+  <%= @comment.git_number %>
+</p>
+
+<p>
+  <b>Owner name:</b>
+  <%= @comment.owner_name %>
+</p>
+
+<p>
+  <b>Owner image:</b>
+  <%= @comment.owner_image %>
+</p>
+
+<p>
+  <b>Issue:</b>
+  <%= @comment.issue_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_comment_path(@comment) %> |
+<%= link_to 'Back', comments_path %>
