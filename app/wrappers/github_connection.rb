@@ -1,6 +1,6 @@
 class GithubConnection
 
-  attr_accessor :repo, :info, :issue_no, :client, :issues, :name
+  attr_accessor :repo, :info, :issue_no, :client, :issues, :name, :comments
 
   def initialize(owner, repo, issue_no = nil)
     @client = Octokit::Client.new(:login => "flatiron-dummy", :password => "flatiron2012")
@@ -8,6 +8,7 @@ class GithubConnection
     @info = @client.repo(@repo)
     @issue_no = issue_no
     @issues = @client.list_issues(@repo)
+    @comments = @client.issue_comments(@repo, @issue_no)
   end
 
   def self.repo_params(*args)
