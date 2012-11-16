@@ -41,6 +41,13 @@ class CommentsController < ApplicationController
   # POST /comments.json
   def create
     @comment = Comment.new(params[:comment])
+    client = Octokit::Client.new(:login => current_user.nickname,
+                                  :oauth_token => session[:token])
+    debugger
+    repo = "xfernandox/dummyrepo"
+    number = 16
+    comment = "test"
+    client.add_comment(repo, number, comment)
 
     respond_to do |format|
       if @comment.save

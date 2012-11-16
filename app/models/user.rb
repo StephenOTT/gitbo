@@ -10,9 +10,5 @@ class User < ActiveRecord::Base
     user.email = auth["info"]["email"]
     end
   end
-
-  def session_token
-    session[:token]
-  end
   
 end
