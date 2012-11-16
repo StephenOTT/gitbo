@@ -1,29 +1,24 @@
-<%= form_for(@bounty) do |f| %>
-  <% if @bounty.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@bounty.errors.count, "error") %> prohibited this bounty from being saved:</h2>
 
-      <ul>
-      <% @bounty.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+
+<form accept-charset="UTF-8" action="/bounties" class="new_bounty" id="new_bounty" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /><input name="authenticity_token" type="hidden" value="MvgSUWMGUsK+Ap3/Nfk29rdDx6MyJlzcEO51c/ihWqk=" /></div>
 
   <div class="field">
-    <%= f.label :user_id %><br />
-    <%= f.number_field :user_id %>
+    <label for="bounty_user_id">Repo Owner</label><br />
+    <input id="user_name" name="user_nickname" type="text" value="<%= @issue.repo.owner_name %>" />
   </div>
   <div class="field">
-    <%= f.label :issue_id %><br />
-    <%= f.number_field :issue_id %>
+    <label for="repo">Repo</label><br />
+    <input id="repo_name" name="repo_name" type="text" value="<%= @issue.repo.name %>" />
   </div>
   <div class="field">
-    <%= f.label :price %><br />
-    <%= f.number_field :price %>
+    <label for="bounty_issue_id">Issue Number</label><br />
+    <input id="bounty_issue_id" name="git_number" type="number" value="<%= @issue.git_number %>" />
+  </div>
+  <div class="field">
+    <label for="bounty_price">Price</label><br />
+    <input id="bounty_price" name="price" type="number" />
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <input name="commit" type="submit" value="Create Bounty" />
   </div>
-<% end %>
+</form>

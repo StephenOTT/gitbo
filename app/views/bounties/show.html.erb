@@ -2,12 +2,12 @@
 
 <p>
   <b>User:</b>
-  <%= @bounty.user_id %>
+  <%= @bounty.user.nickname %>
 </p>
 
 <p>
   <b>Issue:</b>
-  <%= @bounty.issue_id %>
+  <%= @bounty.issue.title %>
 </p>
 
 <p>
@@ -17,4 +17,4 @@
 
 
 <%= link_to 'Edit', edit_bounty_path(@bounty) %> |
-<%= link_to 'Back', bounties_path %>
+<%= link_to 'Back to Issue', owner_repo_gitnumber_path(@bounty.issue.repo.owner_name, @bounty.issue.repo.name, @bounty.issue.git_number) %>

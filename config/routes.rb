@@ -2,6 +2,8 @@ require 'sidekiq/web'
 
 Gitbo::Application.routes.draw do
 
+  get '/:owner/:repo/issues/:git_no/bounty/new' => "bounties#new", :as => :new_bounty
+
   resources :bounties
 
   resources :comments

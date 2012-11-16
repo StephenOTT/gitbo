@@ -8,11 +8,27 @@
   </div>
   <div class="span4">
     <h3 class="pull-right">
-      <a class="btn btn-success btn-small" href="#">Issue Bounty</a>
+      <%= link_to "Issue Bounty", new_bounty_path(@issue.repo.owner_name, @issue.repo.name, @issue.git_number), :class => "btn btn-success btn-small" %>
       <a class="btn btn-info btn-small" href="http://www.github.com/<%= @issue.repo.owner_name %>/<%= @issue.repo.name %>/issues/<%= @issue.git_number %>" target="blank">View Issue on Github</a>
     </h3>
   </div>
 </div>
+
+<div class="row">
+  <div class="span12">
+    <h3>Current Bounties</h3>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
 <div class="row">
   <div class='span2'>
     <h4>Git Number: <%= @issue.git_number %></h4>
