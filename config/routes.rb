@@ -4,7 +4,7 @@ Gitbo::Application.routes.draw do
 
   post '/:owner/:repo/issues/:git_no/bounty/' => "bounties#create", :as => :create_issue_bounty
 
-  get '/:owner/:repo/issues/:git_no/bounty/new' => "bounties#new", :as => :new_bounty
+  get '/:owner/:repo/issues/:git_no/bounty/new' => "bounties#new", :as => :new_issue_bounty
 
   resources :bounties
 
