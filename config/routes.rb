@@ -2,6 +2,8 @@ require 'sidekiq/web'
 
 Gitbo::Application.routes.draw do
 
+  resources :bounties
+
   resources :comments
 
   resources :users
