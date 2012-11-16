@@ -41,8 +41,8 @@ class BountiesController < ApplicationController
   # POST /bounties
   # POST /bounties.json
   def create
-    repo = Repo.find_by_name(params[:repo_name])
-    git_number = params[:git_number]
+    repo = Repo.find_by_owner_name_and_name(params[:owner], params[:repo])
+    git_number = params[:git_no]
     issue = Issue.find_by_git_number_and_repo_id(git_number, repo.id)
     price = params[:price]
 
@@ -53,7 +53,7 @@ class BountiesController < ApplicationController
 
     respond_to do |format|
       if @bounty.save
-        format.html { redirect_to @bounty, notice: 'Bounty was successfully created.' }
+        format.html { redirect_to owner_repo_gitnumber_path(@bounty.issue.repo.owner_name, @bounty.issue.repo.name, @bounty.issue.git_number), notice: 'Bounty was successfully created.' }
         format.json { render json: @bounty, status: :created, location: @bounty }
       else
         format.html { render action: "new" }

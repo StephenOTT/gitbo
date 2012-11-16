@@ -1,24 +1,41 @@
+<% if @issue %>
+<%    submit_path = "/#{@issue.repo.owner_name}/#{@issue.repo.name}/issues/#{@issue.git_number}/bounty" %>
+<% else %>
+<%    submit_path = "/bounties" %>
+<% end %>
+<%= form_tag(submit_path, :method => "post") do %>
+
+    <% unless @issue %>
+      <div class="field">
+        <label for="bounty_user_id">Repo Owner</label><br />
+        <input id="user_name" name="owner" type="text" />
+      </div>
+      <div class="field">
+        <label for="repo">Repo</label><br />
+        <input id="repo_name" name="repo" type="text"/>
+      </div>
+      <div class="field">
+        <label for="bounty_issue_id">Issue Number</label><br />
+        <input id="bounty_issue_id" name="git_no" type="number"  />
+      </div>
+
+    <% else %>
 
 
-<form accept-charset="UTF-8" action="/bounties" class="new_bounty" id="new_bounty" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /><input name="authenticity_token" type="hidden" value="MvgSUWMGUsK+Ap3/Nfk29rdDx6MyJlzcEO51c/ihWqk=" /></div>
+      <h3>For issue #<%= @issue.git_number %> in <%= "#{@issue.repo.owner_name}/#{@issue.repo.name}" %></h3>
 
-  <div class="field">
-    <label for="bounty_user_id">Repo Owner</label><br />
-    <input id="user_name" name="user_nickname" type="text" value="<%= @issue.repo.owner_name %>" />
-  </div>
-  <div class="field">
-    <label for="repo">Repo</label><br />
-    <input id="repo_name" name="repo_name" type="text" value="<%= @issue.repo.name %>" />
-  </div>
-  <div class="field">
-    <label for="bounty_issue_id">Issue Number</label><br />
-    <input id="bounty_issue_id" name="git_number" type="number" value="<%= @issue.git_number %>" />
-  </div>
+
+
+    <% end %>
+
+
   <div class="field">
     <label for="bounty_price">Price</label><br />
     <input id="bounty_price" name="price" type="number" />
   </div>
   <div class="actions">
-    <input name="commit" type="submit" value="Create Bounty" />
+    <input name="commit" type="submit" value="Create Bounty" method="post" />
   </div>
-</form>
+
+
+<% end %>
