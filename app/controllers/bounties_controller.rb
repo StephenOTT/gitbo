@@ -25,12 +25,14 @@ class BountiesController < ApplicationController
   # GET /bounties/new
   # GET /bounties/new.json
   def new
-    @issue = Issue.find_by_git_number(params[:git_no])
+    # @issue = Issue.find_by_git_number(params[:git_no])
+    # # raise @issue.git_number.inspect
+    # @repo = @issue.repo
     @bounty = Bounty.new
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @bounty }
-    end
+    # respond_to do |format|
+    #   format.html # new.html.erb
+    #   format.json { render json: @bounty }
+    # end
   end
 
   # GET /bounties/1/edit
@@ -41,15 +43,12 @@ class BountiesController < ApplicationController
   # POST /bounties
   # POST /bounties.json
   def create
-    repo = Repo.find_by_owner_name_and_name(params[:owner], params[:repo])
-    git_number = params[:git_no]
-    issue = Issue.find_by_git_number_and_repo_id(git_number, repo.id)
-    price = params[:price]
+    # repo = Repo.find_by_owner_name_and_name(params[:owner], params[:repo])
+    # git_number = params[:git_no]
+    # issue = Issue.find_by_git_number_and_repo_id(git_number, repo.id)
+    # price = params[:price]
 
-    @bounty = Bounty.new(
-          :user_id => current_user.id,
-          :issue_id => issue.id,
-          :price => price)
+    @bounty = Bounty.new(params[:bounty])
 
     respond_to do |format|
       if @bounty.save

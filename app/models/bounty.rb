@@ -7,4 +7,5 @@ class Bounty < ActiveRecord::Base
     self.price.to_s.prepend("$").insert(-3, ".")
   end
 
+  attr_reader :repo, :repo_owner, :repo_name, :git_number
 end

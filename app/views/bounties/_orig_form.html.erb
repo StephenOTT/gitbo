@@ -1,0 +1,33 @@
+<% if @issue %>
+<%    submit_path = "/#{@issue.repo.owner_name}/#{@issue.repo.name}/issues/#{@issue.git_number}/bounty" %>
+<% else %>
+<%    submit_path = "/bounties" %>
+<% end %>
+
+<%= form_tag(submit_path, :method => "post") do %>
+  <% unless @issue %>
+    <div class="field">
+      <label for="bounty_user_id">Repo Owner</label><br />
+      <input id="user_name" name="owner" type="text" />
+    </div>
+    <div class="field">
+      <label for="repo">Repo</label><br />
+      <input id="repo_name" name="repo" type="text"/>
+    </div>
+    <div class="field">
+      <label for="bounty_issue_id">Issue Number</label><br />
+      <input id="bounty_issue_id" name="git_no" type="number"  />
+    </div>
+  <% else %>
+    <h3>For issue #<%= @issue.git_number %> in <%= "#{@issue.repo.owner_name}/#{@issue.repo.name}" %></h3>
+  <% end %>
+
+  <div class="field">
+    <label for="bounty_price">Price</label><br />
+    <input id="bounty_price" name="price" type="number" />
+  </div>
+  <div class="actions">
+    <input name="commit" type="submit" value="Create Bounty" method="post" />
+  </div>
+
+<% end %>

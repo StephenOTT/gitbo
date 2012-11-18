@@ -1,0 +1,23 @@
+<% submit_path = "/bounties" %>
+<%= form_tag(submit_path, :method => "post") do %>
+  <% unless @issue %>
+    <div class="field">
+      <label for="bounty_user_id">Repo Owner</label><br />
+      <input id="user_name" name="owner" type="text" />
+    </div>
+    <div class="field">
+      <label for="repo">Repo</label><br />
+      <input id="repo_name" name="repo" type="text"/>
+    </div>
+    <div class="field">
+      <label for="bounty_issue_id">Issue Number</label><br />
+      <input id="bounty_issue_id" name="git_no" type="number"  />
+    </div>
+
+    <div class="field">
+    <label for="bounty_price">Price</label><br />
+    <input id="bounty_price" name="price" type="number" />
+  </div>
+  <div class="actions">
+    <input name="commit" type="submit" value="Create Bounty" method="post" />
+  </div>
