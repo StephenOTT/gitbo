@@ -7,7 +7,7 @@ class UserVoteController < ApplicationController
     uv.upvote = 1
   end
 
-  def add_upvote
+  def add_downvote
     uv= UserVote.new
     uv.user_id = current_user.id
     uv.issue_id = Issue.find(:id)

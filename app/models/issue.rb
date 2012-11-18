@@ -47,7 +47,7 @@ class Issue < ActiveRecord::Base
     self.comment_count + upvote - downvote
   end
 
-  def add_vote_by(user, direction = :upvote, int = 1)
+  def add_vote_by(user, direction, int = 1)
     self.increment(direction, int)
     self.user_votes.create(:user => user, direction => 1)
   end
@@ -78,17 +78,27 @@ class Issue < ActiveRecord::Base
                             :state => github_connection.issue_state )
   end
 
+  # def add_vote_by(user, direction, int = 1)
+  #   self.increment(direction, int)
+  #   self.user_votes.create(:user => user, direction => 1)
+  # end
+
+  def add_endorsement_by(repo_owner, direction, int = 1)
+    self.increment(direction, int)
+    self.issue.create(:issue => issue, :direction => direction)
+  end  
+  
   def endorsement_by(approval)
     self.send(approval.to_sym)
   end
 
-  def endorsement
-    self.owner_endorsement = 1
-  end
+  # def endorsement
+  #   self.owner_endorsement = 1
+  # end
 
-  def disapproval
-    self.owner_endorsement = -1
-  end
+  # def disapproval
+  #   self.owner_endorsement = -1
+  # end
 
 
 end

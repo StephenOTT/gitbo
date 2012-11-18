@@ -18,10 +18,10 @@
 <% @issues.sort_by(&:popularity).reverse.each do |issue| %>
   <tr>
     <% if current_user %>
-        <td><%= link_to vote_issue_path(issue.id, :upvote), :method => :put do %>
+        <td><%= link_to vote_issue_path(issue.id, :upvote), :direction => 1, :method => :put do %>
                 <i class="icon-arrow-up"></i>
             <% end %></td>
-        <td><%= link_to vote_issue_path(issue.id, :downvote), :method => :put do %>
+        <td><%= link_to vote_issue_path(issue.id, :downvote), :direction => -1, :method => :put do %>
                 <i class="icon-arrow-down"></i>
             <% end %></td>
     <% else %>

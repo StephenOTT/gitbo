@@ -8,13 +8,13 @@ class IssuesController < ApplicationController
     issue = Issue.find(params[:id])
     issue.add_vote_by(current_user, params[:direction])
     issue.save
-
     redirect_to :back
   end
 
   def endorsement
     issue = Issue.find(params[:id])
-    issue.endorsement_by(params[:direction])
+    repo_owner
+    issue.add_endorsement_by(repo_owner, params[:direction])
     issue.save
     redirect_to :back
   end

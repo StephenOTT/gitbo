@@ -8,8 +8,8 @@
       <div class="span5">
         <div class="pull-right">
           <div class="btn-group">
-            <button class="btn btn-success btn-small"><%= link_to 'Endorse this issue', owner_endorsement_path(@issue, :endorsement), :method => :put %></button>
-            <button class="btn btn-danger btn-small"><%= link_to 'Don\'t endorce', owner_endorsement_path(@issue, :disapproval), :method => :put %></button>
+            <button class="btn btn-success btn-small"><%= link_to 'Endorse this issue', owner_endorsement_path(@issue, :endorsement, :direction => 1), :method => :put %></button>
+            <button class="btn btn-danger btn-small"><%= link_to 'Don\'t endorce', owner_endorsement_path(@issue, :disapproval, :direction => "-1"), :method => :put %></button>
           </a></div>
         </div>
       </div>
