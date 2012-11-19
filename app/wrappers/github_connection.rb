@@ -6,7 +6,7 @@ class GithubConnection
 
    
 
-    @client = Octokit::Client.new(:login => "innatewonderer", :password => "Mpyefq1")
+    @client = Octokit::Client.new(:oauth_token => token)
     @repo = "#{owner}/#{repo}"
     @info = @client.repo(@repo)
     @issues = @client.list_issues(@repo)
