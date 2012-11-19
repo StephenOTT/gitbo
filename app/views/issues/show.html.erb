@@ -31,7 +31,7 @@
     </div>
     <div class="span4">
     <h3 class="pull-right">
-      <%= link_to "Issue Bounty", new_issue_bounty_path(@issue.repo.owner_name, @issue.repo.name, @issue.git_number), :class => "btn btn-success btn-small" %>
+      <%= link_to "Issue Bounty", new_issue_bounty_path(@issue.repo.owner_name, @issue.repo.name, @issue.git_number), :class => "btn btn-success btn-small", id: "new_link", remote: true %>
       <a class="btn btn-info btn-small" href="http://www.github.com/<%= @issue.repo.owner_name %>/<%= @issue.repo.name %>/issues/<%= @issue.git_number %>" target="blank">View Issue on Github</a>
     </h3>
   </div>
@@ -44,7 +44,7 @@
 </div>
 
 <% if @issue.bounties.count != 0 %>
-  <table class="table table-hover">
+  <table class="table table-hover", id: "bounties">
       <thead>
         <tr>
           <th>Bounty Issued by</th>
