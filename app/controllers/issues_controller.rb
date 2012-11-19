@@ -85,11 +85,18 @@ class IssuesController < ApplicationController
   # POST /issues
   # POST /issues.json
   def create
-    @issue = Issue.create_from_github(params[:owner_name, :name, :git_number])
+    raise params.inspect
+    owner = params[:issue][:repo][:owner_name]
+    repo = params[:issue][:repo][:name]
+    issue = params[:issue][:git_number]
 
+    @issue = Issue.create_from_github(owner, repo, issue)
     # need it?
     # @issues = @repo.issues
     # github_connection = GithubConnection.new(params[:owner], @repo.name)
+    
+    # want to be able to create and save this repo to database 
+    @repo = Repo.create_from_github(owner, repo)
 
     respond_to do |format|
       if @issue.save

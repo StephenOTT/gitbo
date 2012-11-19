@@ -16,12 +16,12 @@
   <% end %>
 
     <p>
-      <%= f.fields_for :repos, @issue.repo do |f| %>
-        <%= f.label :owner_name %><br />
-        <%= f.text_field :owner_name %><br />
-        <%= f.label :name %><br />
-        <!-- text_area leaves a block. specify rows for -->
-        <%= f.text_area :name, :rows => 3, :class => "field span4" %><br />
+      <%= f.fields_for :repo, @issue.repo do |builder| %>
+        <%= builder.label :owner_name %><br />
+        <%= builder.text_field :owner_name %><br />
+        <%= builder.label :name %><br />
+        <!-- text_area leaves a block. specibuildery rows builderor -->
+        <%= builder.text_area :name, :rows => 3, :class => "field span4" %><br />
     </p>
     <p><%= f.label :git_number %><br />
     <%= f.text_field :git_number %><br />
