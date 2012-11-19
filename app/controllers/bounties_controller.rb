@@ -55,7 +55,7 @@ class BountiesController < ApplicationController
     respond_to do |format|
       if @bounty.save
         format.html { redirect_to owner_repo_gitnumber_path(@bounty.issue.repo.owner_name, @bounty.issue.repo.name, @bounty.issue.git_number), notice: 'Bounty was successfully created.' }
-        # format.json { render json: @bounty, status: :created, location: @bounty }
+        format.json { render json: @bounty, status: :created, location: @bounty }
         format.js
       else
         format.html { render action: "new" }

@@ -2,7 +2,7 @@
   <%  submit_path = "/#{@issue.repo.owner_name}/#{@issue.repo.name}/issues/#{@issue.git_number}/bounty" %>
 <% end %>
 
-<%= form_tag(submit_path, :method => "post", remote: true) do %>
+<%= form_tag(submit_path, :method => "post", remote: true, :id => "new_bounty_form" ) do %>
 
 <!-- <h3>For issue #<%#= @issue.git_number %> in <%#= "#{@issue.repo.owner_name}/#{@issue.repo.name}" %></h3> -->
 
