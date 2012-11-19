@@ -2,7 +2,7 @@
   <div id="error_explanation"><%= flash[:error] %></div>
 <% end %>
 
-<%= form_for(@repo) do |f| %>
+<%= form_for(@repo), remote: true do |f| %>
   <% if @repo.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@repo.errors.count, "error") %> prohibited this repo from being saved:</h2>
@@ -15,15 +15,14 @@
     </div>
   <% end %>
 
-  <%= form_for(@repo) do |f| %>
     <p>
-    <%= f.label :owner_name %> <br />
-    <%= f.text_field :owner_name %>
-  </p>
+      <%= f.label :owner_name %> <br />
+      <%= f.text_field :owner_name %>
+    </p>
     <p>
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
+      <%= f.label :name %><br />
+      <%= f.text_field :name %>
   </p>
     <%= f.submit 'Create Repo', :class => 'btn btn-success' %>
-  <% end %>
+
 <% end %>
