@@ -13,4 +13,7 @@ module ApplicationHelper
     Redcarpet::Markdown.new(renderer, options).render(text).html_safe
   end
 
+  def escape_js(args, opts = {})
+    j(render(args, opts))
+  end
 end

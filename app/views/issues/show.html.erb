@@ -154,21 +154,21 @@
 
   var oldTime = new Date('<%= @issue.updated_at %>');
 
-  setInterval(function() {
-    var url = '<%= "/#{@issue.repo.owner_name}/#{@issue.repo.name}/issues/#{@issue.git_number}.json" %>'
-    $.getJSON(url, {}, function(json){
-      var newTime = new Date(Date.parse(json.updated_at));
-      console.log(newTime)
+  // setInterval(function() {
+  //   var url = '<%= "/#{@issue.repo.owner_name}/#{@issue.repo.name}/issues/#{@issue.git_number}.json" %>'
+  //   $.getJSON(url, {}, function(json){
+  //     var newTime = new Date(Date.parse(json.updated_at));
+  //     console.log(newTime)
       
-      if (oldTime.valueOf() != newTime.valueOf()){
-        console.log('diff')
-        $('div#seal.seal.pull-right').fadeTo(3000, 1);
-        $('div#seal.seal.pull-right').click(function(){
-          location.reload();
-        });
-      }
-    });
-  }, 4000);
+  //     if (oldTime.valueOf() != newTime.valueOf()){
+  //       console.log('diff')
+  //       $('div#seal.seal.pull-right').fadeTo(3000, 1);
+  //       $('div#seal.seal.pull-right').click(function(){
+  //         location.reload();
+  //       });
+  //     }
+  //   });
+  // }, 4000);
 
 </script>
 

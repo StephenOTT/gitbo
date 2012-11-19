@@ -1,4 +1,4 @@
   $('#new_bounty_form').remove();
   $('#new_link').show();
-  $('#bounties_table').append('<%= j render(@bounty) %>');
-  location.reload();
+  $('#bounties_table tbody').prepend("<%= j render(@bounty) %>");
+

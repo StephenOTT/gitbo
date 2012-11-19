@@ -1,0 +1,6 @@
+<tr>
+  <td><%= bounty.user.nickname %></td>
+  <td><%= number_to_currency(bounty.price, :precision => 0) %></td>
+  <td><%= time_ago_in_words( bounty.created_at ) %> ago</td>
+  <td><%= time_ago_in_words( bounty.updated_at ) %> ago</td>
+</tr>

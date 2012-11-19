@@ -52,13 +52,13 @@ class IssuesController < ApplicationController
     repo = Repo.find_by_owner_name_and_name(params[:owner], params[:repo])
 
     @issue = Issue.find_by_repo_id_and_git_number(repo.id, params[:git_number])
-    github_connection = GithubConnection.new(params[:owner], params[:repo], params[:git_number])
+    # github_connection = GithubConnection.new(params[:owner], params[:repo], params[:git_number])
 
 
-    if @issue.updated?(github_connection)
-      RefreshIssuesWorker.perform_async(@issue.id)
-      flash[:notice] = "Updating issue from Github, please refresh"
-    end 
+    # if @issue.updated?(github_connection)
+    #   RefreshIssuesWorker.perform_async(@issue.id)
+    #   flash[:notice] = "Updating issue from Github, please refresh"
+    # end 
 
     respond_to do |format|
       format.html # show.html.erb

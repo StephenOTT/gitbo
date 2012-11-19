@@ -1,4 +1,4 @@
-<table class="table table-hover", id="bounties_table">
+<table class="table table-hover" id="bounties_table">
   <thead>
     <tr>
       <th>Bounty Issued by</th>
@@ -9,12 +9,7 @@
   </thead>
   <tbody>
     <% issue.bounties.sort_by(&:price).reverse.each do |bounty| %>
-      <tr>
-        <td><%= bounty.user.nickname %></td>
-        <td><%= number_to_currency(bounty.price, :precision => 0) %></td>
-        <td><%= time_ago_in_words( bounty.created_at ) %> ago</td>
-        <td><%= time_ago_in_words( bounty.updated_at ) %> ago</td>
-      </tr>
+      <%= render bounty %>
     <% end %>
   </tbody>
 </table>
