@@ -51,6 +51,12 @@ gem "twitter-bootstrap-rails"
 
 gem 'redcarpet'
 
+#caching
+gem 'dalli'
+
+#chron jobs
+gem 'whenever', :require => false
+
 # To use Jbuilder templates for JSON
 # gem 'jbuilder'
 
@@ -63,5 +69,5 @@ gem 'redcarpet'
 # To use debugger
 # gem 'debugger'
 
-gem 'octokit'
+gem 'octokit', :git => 'git@github.com:ajonas04/octokit.git'
 gem 'will_paginate'

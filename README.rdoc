@@ -116,3 +116,6 @@ Then manually start the database with:
       host: localhost
 
 
+
+- Memcached
+♕ /usr/local/bin/memcached
