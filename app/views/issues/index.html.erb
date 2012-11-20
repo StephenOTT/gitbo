@@ -1,84 +1,77 @@
 <div class="row">
-    <div class="span6">
-        <h1>Listing issues</h1>
+  <div class="span6">
+    <h1>Listing issues</h1>
+  </div>
+  <div class="span6">
+    <div class="pull-right">
+      <p> Need to add your issue?</p>
+      <p><%= link_to 'Add your issues', new_repo_path, id: "new_link",  :class => "btn btn-success btn-large" %></p>
     </div>
-    <div class="span6">
-        <div class="pull-right">
-            <p> Need to add your issue?</p>
-            <p><%= link_to 'Add your issues', new_repo_path, id: "new_link",  :class => "btn btn-success btn-large" %></p>
-        </div>
-    </div>
+  </div>
 </div>
 
-<table id="issues_table" class="table table-hover">
-    <thead>
-      <tr>
-        <th data-sorter="false"></th>
-        <th data-sorter="false"></th>
-        <th>Issue Name</th>
-        <th>Repo Name</th>
-        <th>Issue Number</th>
-        <th>Comment Count</th>
-        <th>Popularity</th>
-        <th>Upvote</th>
-        <th>Downvote</th>
-        <th data-sorter="false">Owner Endorsement</th>
-        <th data-string="bottom">Post a Bounty</th>
-      </tr>
-    </thead>
-
-<% @issues.sort_by(&:popularity).reverse.each do |issue| %>
-  <tr>
-    
-    <% if current_user %>
+<table id="issues_table" class="display">
+  <thead>
+    <tr>
+      <th></th>
+      <th></th>
+      <th>Issue Name</th>
+      <th>Repo Name</th>
+      <th>Issue Number</th>
+      <th>Comment Count</th>
+      <th>Popularity</th>
+      <!-- <th>Upvote</th>
+      <th>Downvote</th> -->
+      <th>Owner Endorsement</th>
+      <th>Post a Bounty</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @issues.sort_by(&:popularity).reverse.each do |issue| %>
+    <tr>
+      <% if current_user %>
         <td><%= link_to vote_issue_path(issue.id, :upvote), :method => :put do %>
                 <i class="icon-arrow-up"></i>
             <% end %></td>
         <td><%= link_to vote_issue_path(issue.id, :downvote), :method => :put do %>
                 <i class="icon-arrow-down"></i>
             <% end %></td>
-    <% else %>
-        <td id="vote-prompt"><i class="icon-arrow-up"></i></td>
-        <td id="vote-prompt"><i class="icon-arrow-down"></i></td>
-    <% end %>
-
-    <td><%= link_to issue.title, owner_repo_gitnumber_path(issue.repo.owner_name, issue.repo.name, issue.git_number) %></td>
-    <td><%= link_to issue.repo.name, owner_repo_path(issue.repo.owner_name, issue.repo.name) %></td>
-    <td><%= issue.git_number %></td>
-    <td><%= issue.comment_count %></td>
-    <td><%= issue.popularity %></td>
-    <td><%= issue.upvote %></td>
-    <td><%= issue.downvote %></td>
-    <% if issue.owner_endorsement == 1 %>
-        <td><i class="icon-thumbs-up" ></i></td>
-    <% elsif issue.owner_endorsement == 0 %>
-        <td><i class="icon-time" ></i></td>
-    <% else %>
-        <td><i class="icon-thumbs-down" ></i></td>
-    <% end %>
-
-    <% if current_user %>
+      <% else %>
+          <td id="vote-prompt"><i class="icon-arrow-up"></i></td>
+          <td id="vote-prompt"><i class="icon-arrow-down"></i></td>
+      <% end %>
+      <td><%= link_to issue.title, owner_repo_gitnumber_path(issue.repo.owner_name, issue.repo.name, issue.git_number) %></td>
+      <td><%= link_to issue.repo.name, owner_repo_path(issue.repo.owner_name, issue.repo.name) %></td>
+      <td><%= issue.git_number %></td>
+      <td><%= issue.comment_count %></td>
+      <td><%= issue.popularity %></td>
+     <!--  <td><%#= issue.upvote %></td>
+      <td><%#= issue.downvote %></td> -->
+      <% if issue.owner_endorsement == 1 %>
+          <td><i class="icon-thumbs-up" ></i></td>
+      <% elsif issue.owner_endorsement == 0 %>
+          <td><i class="icon-time" ></i></td>
+      <% else %>
+          <td><i class="icon-thumbs-down" ></i></td>
+      <% end %>
+      <% if current_user %>
         <% if issue.bounty_total == 0 %>
-           <td><%= link_to new_issue_bounty_path(issue.repo.owner_name, issue.repo, issue.git_number) do %>
-            <span class="label label-success">Post a bounty</span>
-             <% end %></td>
+         <td><%= link_to new_issue_bounty_path(issue.repo.owner_name, issue.repo, issue.git_number) do %>
+          <span class="label label-success">Post a bounty</span>
+           <% end %></td>
         <% else %>
             <td><%= link_to owner_repo_gitnumber_path(issue.repo.owner_name, issue.repo.name, issue.git_number) do %>
                 <span class="label label-warning"><%= number_to_currency(issue.bounty_total, :raise => true, :precision => 0)%></span>
             <% end %></td>
         <% end %>
-    <% else %>
+      <% else %>
         <% if issue.bounty_total ==  0 %>
            <td><span id="bounty-prompt" class="label label-success">Post a bounty</span></td>
         <% else %>
             <td><span id="bounty-prompt" class="label label-warning"><%= number_to_currency(issue.bounty_total, :raise => true, :precision => 0)%></span></td>
-        <% end %>
+      <% end %>
     <% end %>
-  </tr>
-<% end %>
+    </tr>
+  <% end %>
+  </tbody>
 </table>
-
-<<<<<<< HEAD
-=======
-
->>>>>>> testing

@@ -19,6 +19,8 @@ group :assets do
   # gem 'therubyracer', :platforms => :ruby
 
   gem 'uglifier', '>= 1.0.3'
+  gem 'jquery-datatables-rails', github: 'rweng/jquery-datatables-rails'
+  gem 'jquery-ui-rails'
 end
 
 gem 'jquery-rails'
@@ -62,4 +64,4 @@ gem 'redcarpet'
 # gem 'debugger'
 
 gem 'octokit'
-gem 'jquery-tablesorter'
+gem 'will_paginate'
