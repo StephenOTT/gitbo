@@ -119,3 +119,6 @@ Then manually start the database with:
 
 - Memcached
 ♕ /usr/local/bin/memcached
+
+Client:
+Octokit::Client.new(:login => "flatiron-dummy", :password => "flatiron2012")
