@@ -14,4 +14,4 @@ class RefreshIssuesWorker
     end
   end
 
-endmy
+end
