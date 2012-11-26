@@ -23,6 +23,8 @@ class UsersController < ApplicationController
       @repos = Repo.find_all_by_owner_name(params[:owner])
     end
 
+    @repo = Repo.new
+
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @user }

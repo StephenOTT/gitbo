@@ -36,7 +36,10 @@ class User < ActiveRecord::Base
   end
 
   def cached_starred
-    user_cache[:starred]
+    user_cache[:starred].collect do |repo_string|
+      owner_name, name = repo_string.split('/')
+      {:owner_name => owner_name, :name => name}
+    end
   end
 
   def cached_following

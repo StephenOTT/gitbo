@@ -1,4 +1,4 @@
-<div id="new-repo" class="modal hide fade" tabindex="-1" data-focus-on="input:first">
+<div id="new-repo<%= "_#{repo_name if repo_name}" %>" class="modal hide fade" tabindex="-1" data-focus-on="input:first">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
     <h3>Upload Your Repo</h3>
@@ -11,7 +11,7 @@
     </p>
     <p>
       <%= f.label :name %><br />
-      <%= f.text_field :name %>
+      <%= f.text_field :name, :value => "#{repo_name if repo_name}" %>
     </p>
   </div>
   <div class="modal-footer">

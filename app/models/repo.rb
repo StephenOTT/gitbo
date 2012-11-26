@@ -126,6 +126,10 @@ class Repo < ActiveRecord::Base
     self.create_missing_issues(missing_issues)
   end
 
+  def self.is_registered?(repo)
+    Repo.find_by_owner_name_and_name(repo[:owner_name], repo[:name])
+  end 
+
 private
 
   def open_issues_updated?(github_connection)

@@ -32,58 +32,8 @@
 
 <% end %>
 
-<% if owner_logged_in? && @user %>
-<div class="user_info">
-  <table style="float:left;">
-  <thead>
-    <tr>
-      <th>Repos</th>
-    </tr>
-  </thead> 
-      <% @user.cached_repos.each do |repo| %>
-      <% #this is repeated logic in the table above... %>
-        <%# if repo_uploaded?(repo) %>
-          <!-- <tr><td><%#= link_to repo, owner_repos_path(user) %></td></tr> -->
-        <%# else %>
-          <tr><td><%= repo %></td></tr>
-        <%# end %>
-      <% end %>
-  </table>
-
-
-  <table style="float:left;">
-  <thead>
-    <tr>
-      <th>Following</th>
-    </tr>
-  </thead> 
-      <% @user.cached_following.each do |user| %>
-        <% if User.is_the_owner_registered?(user) %>
-          <tr><td><%= link_to user, owner_repos_path(user) %></td></tr>
-        <% else %>
-          <tr><td><%= user %></td></tr>
-        <% end %>
-      <% end %>
-  </table>
-
-
-  <table style="float:left;">
-  <thead>
-    <tr>
-      <th>Starred</th>
-    </tr>
-  </thead> 
-    <% @user.cached_starred.each do |repo| %>
-       <tr><td><%= repo %></td></tr>
-    <% end %>
-  </table>
-</div>
-<div style="clear:both;"></div>
-      
-<% end %>
-
 <% if @user && owner_logged_in?  %>
-<h1><%= @user.nickname %>'s Bounties</h1>
+<h3><%= @user.nickname %>'s Bounties</h3>
 
 <p id="notice"><%= notice %></p>
 
@@ -117,4 +67,61 @@
     </table>
   </div>
 <% end %>
+
+<% if owner_logged_in? && @user %>
+<div class="user_info">
+  <table style="float:left;">
+  <thead>
+    <tr>
+      <th>Repos</th>
+    </tr>
+  </thead> 
+      <% @user.cached_repos.each do |repo| %>
+          <tr><td><a data-toggle="modal" href="#new-repo<%= "_#{repo}" %>">
+        <i class="icon-upload-alt"></i></a> <%= repo %></td></tr>
+        <%= render :partial => 'modals/repo_uploader_prepopulated', :locals => { :repo_name => repo } %>
+      <% end %>
+  </table>
+
+
+
+  
+
+
+  <table style="float:left;">
+  <thead>
+    <tr>
+      <th>Following</th>
+    </tr>
+  </thead> 
+      <% @user.cached_following.each do |user| %>
+        <% if User.is_the_owner_registered?(user) %>
+          <tr><td><%= link_to user, owner_repos_path(user) %></td></tr>
+        <% else %>
+          <tr><td><%= user %></td></tr>
+        <% end %>
+      <% end %>
+  </table>
+
+
+  <table style="float:left;">
+  <thead>
+    <tr>
+      <th>Starred</th>
+    </tr>
+  </thead> 
+    <% @user.cached_starred.each do |repo| %>
+      <% if Repo.is_registered?(repo) %>
+         <tr><td><%= link_to repo[:owner_name], owner_repos_path(repo[:owner_name]) %>/<%= link_to repo[:name], owner_repo_path(repo[:owner_name], repo[:name]) %></td></tr>
+      <% else %>
+        <tr><td><%= repo[:owner_name] %>/<%= repo[:name] %></td></tr>
+      <% end %>
+    <% end %>
+  </table>
+</div>
+<div style="clear:both;"></div>
+      
+<% end %>
+
+
 <% end %>
