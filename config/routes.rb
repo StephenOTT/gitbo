@@ -2,6 +2,9 @@ require 'sidekiq/web'
 
 Gitbo::Application.routes.draw do
 
+  # sidekiq monitoring
+  mount Sidekiq::Web, at: "/sidekiq"
+
   post '/:owner/:repo/issues/:git_no/bounty/' => "bounties#create", :as => :create_issue_bounty
 
   get '/:owner/:repo/issues/:git_no/bounty/new' => "bounties#new", :as => :new_issue_bounty
@@ -40,9 +43,6 @@ Gitbo::Application.routes.draw do
   get "/:owner/:repo/issues/:git_number" => 'issues#show', :as => :owner_repo_gitnumber
   get "/:owner/*repo" => 'repos#show', :as => :owner_repo, :format => false
   get "/:owner" => 'users#show', :as => :owner_repos
-
-  ### sidekiq monitoring
-  mount Sidekiq::Web, at: "/sidekiq"
 
   root :to => 'static#index'
 

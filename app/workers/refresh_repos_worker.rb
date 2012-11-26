@@ -5,9 +5,12 @@ class RefreshReposWorker
 
   def perform(repo_id)
     repo = Repo.find(repo_id)
-    # github_connection = GithubConnection.new(repo.owner_name, repo.name)
-    # repo.update_repo_attributes(github_connection) 
-    # repo.refresh_and_create_issues(github_connection)
+
+    my_client = Octokit::Client.new(:oauth_token => token)
+    if my_client.repo("#{repo.owner_name}/#{repo.name}", :since => my_client.last_modified)
+      github_connection = GithubConnection.new(repo.owner_name, repo.name)
+      repo.update_repo_attributes(github_connection)
+    end
   end
 
 end
