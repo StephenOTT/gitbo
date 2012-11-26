@@ -66,8 +66,8 @@ ActiveRecord::Schema.define(:version => 20121124224756) do
   create_table "user_votes", :force => true do |t|
     t.integer  "user_id"
     t.integer  "issue_id"
-    t.integer  "upvote",            :default => 0
-    t.integer  "downvote",          :default => 0
+    t.integer  "upvote"
+    t.integer  "downvote"
     t.datetime "created_at",                       :null => false
     t.datetime "updated_at",                       :null => false
     t.integer  "difficulty_rating", :default => 0

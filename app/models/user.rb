@@ -32,7 +32,8 @@ class User < ActiveRecord::Base
   end
 
   def user_cache
-    Rails.cache.read(self.nickname.to_sym)
+    Rails.cache.read(self.nickname.to_sym) || load_cache_info(self.session_token) || Hash.new([])
+    
   end
 
   def cached_starred

@@ -38,6 +38,7 @@ class BountiesController < ApplicationController
   def edit
     @bounty = Bounty.find(params[:id])
     @issue = @bounty.issue
+
   end
 
   # POST /bounties
@@ -63,6 +64,8 @@ class BountiesController < ApplicationController
         format.json { render json: @bounty.errors, status: :unprocessable_entity }
       end
     end
+
+    redirect_to(:back)
   end
 
   # PUT /bounties/1
