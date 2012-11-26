@@ -1,0 +1,63 @@
+.gitbo_intro {
+  margin: 0 0 20px 0;
+  h1 {
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: #405A6A;
+    background-image: -moz-linear-gradient(#829AA8, #405A6A);
+    background-image: -webkit-linear-gradient(#829AA8, #405A6A);
+    background-image: linear-gradient(#829AA8, #405A6A);
+    background-repeat: repeat-x;
+    border: 1px solid #677C89;
+    border-bottom-color: #6B808D;
+    border-radius: 5px 5px 0 0;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.7);
+    margin: 0;
+    padding: 8px 10px;
+    position: relative;
+    span {
+      color: #E9F1F4;
+      font-size: 70%;
+      font-weight: normal;
+      text-shadow: none;
+    }
+  }
+  .gitbo_intro_body {
+    padding: 10px 0px 10px 10px;
+    background-color: #E9F1F4;
+    overflow: hidden;
+    border-style: solid;
+    border-width: 1px 1px 2px;
+    border-color: #E9F1F4 #D8DEE2 #D8DEE2;
+    border-radius: 0 0 5px 5px;
+    ul {
+      display: block;
+      list-style-type: disc;
+      -webkit-margin-before: 1em;
+      -webkit-margin-after: 1em;
+      -webkit-margin-start: 0px;
+      -webkit-margin-end: 0px;
+      -webkit-padding-start: 40px;
+      li {
+        color: #666;
+        font-size: 13px;
+        font-weight: normal;
+        background-color: #F5F3B4;
+        background-image: -moz-linear-gradient(#FFFFF5, #F5F3B4);
+        background-image: -webkit-linear-gradient(#FFFFF5, #F5F3B4);
+        background-image: linear-gradient(#FFFFF5, #F5F3B4);
+        background-repeat: repeat-x;
+        border: 1px solid #DFDDB5;
+        border-radius: 5px 5px 5px 5px;
+        display: block;
+        width: 215px;
+        height: 215px;
+        float: left;
+        position: relative;
+        margin: 0 10px 0 0;
+        box-shadow: 0px 1px 0px white;
+      }
+    }
+  }
+}
