@@ -76,15 +76,10 @@ class ReposController < ApplicationController
         owner = params[:repo][:owner_name]
         repo_name = params[:repo][:name]
 
-        repo = Repo.new(:owner_name => owner, :name => repo_name)
-        repo = octokit_client.fetch_repo(repo)
-        @repo = octokit_client.fetch_issues(repo)
-        @repo.save
-
-        @repo.issues.each do |issue|
-          issue = octokit_client.fetch_comments(issue)
-          issue.save
-        end
+        repo = Repo.new(:owner_name => owner, :name => repo_name,
+                       :watchers => 0, :open_issues => 0 )
+        repo.save
+        RepoWorker.perform_async(repo.id, current_user.token)
 
         flash[:notice] = 'Your repository and corresponding issues are being processed, please check back shortly'
         redirect_to :root

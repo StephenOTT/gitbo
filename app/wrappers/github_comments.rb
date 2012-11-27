@@ -1,3 +1,5 @@
+#### DEPRECATED on 11/27/2012 by Kevin M and Josh R ####
+
 class GithubComments
 
     attr_accessor :repo, :info, :issue_no, :client, :issues, :name, :comments
