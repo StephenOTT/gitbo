@@ -1,3 +1,6 @@
+#### DEPRECATED 11/27/2012 by Kevin M and Josh R ####
+
+
 class GithubConnection
 
   attr_accessor :repo, :info, :issue_no, :client, :issues, :name, :comments

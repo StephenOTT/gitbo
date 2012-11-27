@@ -51,8 +51,6 @@ class ReposController < ApplicationController
   # GET /repos/new.json
   def new
 
-    debugger
-
     @repo = Repo.new
     1.times { @repo.issues.build}
 
@@ -82,6 +80,11 @@ class ReposController < ApplicationController
         repo = octokit_client.fetch_repo(repo)
         @repo = octokit_client.fetch_issues(repo)
         @repo.save
+
+        @repo.issues.each do |issue|
+          issue = octokit_client.fetch_comments(issue)
+          issue.save
+        end
 
         flash[:notice] = 'Your repository and corresponding issues are being processed, please check back shortly'
         redirect_to :root
