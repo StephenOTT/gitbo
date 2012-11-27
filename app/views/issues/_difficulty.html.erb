@@ -1,12 +1,14 @@
-<%= form_tag(difficulty_rating_path(@issue.id), :method => "put") do %>
-     
-        <fieldset class="rating">
-          <legend>Please rate difficulty:</legend>
-            <!-- {:impossible => {:title => "Impossible!", :value => 5}, } -->
-            <% 1.upto(5).each do |i| %>
-              <input type="radio" id="star<%= i %>" name="rating" value="<%= i %>" <%= "checked='checked'" if @difficulty == i %>/><label for="star<%= i %>"><%= i %> stars</label>
-            <% end %>
-        </fieldset>
+<% if UserVote.average_difficulty(@issue) != 0.0  %>
+  The average of this issue is: <%= UserVote.average_difficulty(@issue) %>
+<% end %>
 
-  <% end %>
+<%= form_tag(difficulty_rating_path(@issue.id), :method => "put") do %>    
+  <fieldset class="rating">
+    <legend>Please rate difficulty:</legend>
+      <!-- {:impossible => {:title => "Impossible!", :value => 5}, } -->
+      <% 5.downto(1).each do |i| %>
+        <input type="radio" id="star<%= i %>" name="rating" value="<%= i %>" <%= "checked='checked'" if @difficulty == i %>/><label for="star<%= i %>"><%= i %> stars</label>
+      <% end %>
+  </fieldset>
+<% end %>
 

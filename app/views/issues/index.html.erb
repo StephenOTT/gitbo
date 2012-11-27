@@ -39,7 +39,7 @@
           <% end %>
         </td>
       <% else %>
-          <td id="vote-prompt" href="#static" data-toggle="modal"><i class="icon-arrow-up"></i><br />
+          <td id="vote-prompt" href="#login-prompt" data-toggle="modal"><i class="icon-arrow-up"></i><br />
           <i class="icon-arrow-down"></i></td>
       <% end %>
       <td><%= link_to(truncate(issue.title, length:60), owner_repo_gitnumber_path(issue.repo.owner_name, issue.repo.name, issue.git_number)) %></td>
@@ -67,9 +67,9 @@
         <% end %>
       <% else %>
         <% if issue.bounty_total ==  0 %>
-           <td href="#static" data-toggle="modal"><span id="bounty-prompt" class="label label-success">Post a bounty</span></td>
+           <td href="#login-prompt" data-toggle="modal"><span id="bounty-prompt" class="label label-success">Post a bounty</span></td>
         <% else %>
-            <td href="#static" data-toggle="modal"><span id="bounty-prompt" class="label label-warning"><%= number_to_currency(issue.bounty_total, :raise => true, :precision => 0)%></span></td>
+            <td href="#login-prompt" data-toggle="modal"><span id="bounty-prompt" class="label label-warning"><%= number_to_currency(issue.bounty_total, :raise => true, :precision => 0)%></span></td>
       <% end %>
     <% end %>
     </tr>

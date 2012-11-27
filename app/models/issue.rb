@@ -13,10 +13,11 @@ class Issue < ActiveRecord::Base
 
   has_many :user_votes
   
-  # validates :git_number, :uniqueness => { :scope => :repo_id } 
+  validates :git_number, :uniqueness => { :scope => :repo_id } 
 
 
   def self.create_from_github(owner, repo, issue)
+
     github_connection = GithubConnection.new(owner, repo, issue)
 
     Issue.new(:git_number => github_connection.issue_number,
@@ -42,7 +43,6 @@ class Issue < ActiveRecord::Base
 
   def bounty_total
     self.bounties.inject(0) {|total = 0, bounty| total += bounty.price } 
-
   end
 
   def votes
@@ -63,15 +63,14 @@ class Issue < ActiveRecord::Base
     (self.votes+1.0)/(self.time_since_submission + 2)**1.5
   end
 
-   def time_since_submission
+  def time_since_submission
     (Time.now.to_i - self.git_updated_at.to_i)/86400.0
-   end 
+  end 
 
   def add_vote_by(user, direction = :upvote, int = 1)
     self.increment(direction, int)
     self.user_votes.create(:user => user, direction => 1)
   end
-
 
   def add_difficulty_by(user, rank)
     uv = UserVote.find_or_create_by_issue_id_and_user_id(self.id, user.id)
@@ -79,7 +78,7 @@ class Issue < ActiveRecord::Base
   end
 
   def retrieve_difficulty(user)
-    UserVote.find_by_issue_id_and_user_id(self.id, user.id)
+    UserVote.find_or_create_by_issue_id_and_user_id(self.id, user.id).difficulty_rating
   end
 
   def refresh(github_connection)
