@@ -51,6 +51,8 @@ class ReposController < ApplicationController
   # GET /repos/new.json
   def new
 
+    debugger
+
     @repo = Repo.new
     1.times { @repo.issues.build}
 
@@ -75,13 +77,15 @@ class ReposController < ApplicationController
       # if !Repo.find_by_name(params[:repo][:name])
         owner = params[:repo][:owner_name]
         repo_name = params[:repo][:name]
-        
+
         repo = Repo.new(:owner_name => owner, :name => repo_name)
-        @repo = octokit_client.fetch_repo(repo)
+        repo = octokit_client.fetch_repo(repo)
+        @repo = octokit_client.fetch_issues(repo)
         @repo.save
 
         flash[:notice] = 'Your repository and corresponding issues are being processed, please check back shortly'
         redirect_to :root
+
       # else
       #   flash[:error] = "Repository already exists."
       #   redirect_to :root
