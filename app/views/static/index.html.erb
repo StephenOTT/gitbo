@@ -1,4 +1,12 @@
-
+<% if flash[:error] %>
+  <div class='alert alert-error'>
+    <%= flash[:error] %>
+  </div>
+<% elsif flash[:notice] %>
+  <div class='alert alert-success'>
+    <%= flash[:notice] %>
+  </div>
+<% end %>
 <div class='jumbotron'>
    <h1>Gitbo</h1>
    <p class='lead'>Get paid to fix the most asked for Github issues</p> 
