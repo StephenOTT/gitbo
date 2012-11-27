@@ -2,13 +2,12 @@ class GithubConnection
 
   attr_accessor :repo, :info, :issue_no, :client, :issues, :name, :comments
 
-  def initialize(owner, repo, issue = nil, token = nil)
+  def initialize(owner, repo, client = nil, issue = nil)
 
-    @client = session[:client]
+    @client = client
     @repo = "#{owner}/#{repo}"
     @info = @client.repo(@repo)
     @issues = @client.list_issues(@repo)
-    repo = "#{owner}/#{repo}"
     issue_no = issue
     if issue
       @issue_no = issue

@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
     session[:token] = auth.credentials.token
 
     session[:client] = Octokit::Client.new(:oauth_token => auth.credentials.token)
-    user.load_cache_info(session[:client], user)
+    # user.load_cache_info(session[:client], user)
 
     redirect_to :back
 
