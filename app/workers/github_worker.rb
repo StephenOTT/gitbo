@@ -1,4 +1,4 @@
-class GithubWorker
+class RepoWorker
   include Sidekiq::Worker
 
   sidekiq_options retry: false

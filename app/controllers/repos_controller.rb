@@ -24,7 +24,7 @@ class ReposController < ApplicationController
     @repo = Repo.find_by_owner_name_and_name(params[:owner], params[:repo])
 
     @issues = @repo.issues
-    # github_connection = GithubConnection.new(params[:owner], @repo.name, session[:token])
+    # github_connection = GithubConnection.new(params[:owner], @repo.name)
     # if @repo.updated?(github_connection)
     #   RefreshReposWorker.perform_async(@repo.id)
     #   flash[:notice] = "Updating repo from Github, please refresh"
@@ -50,6 +50,7 @@ class ReposController < ApplicationController
   # GET /repos/new
   # GET /repos/new.json
   def new
+
     @repo = Repo.new
     1.times { @repo.issues.build}
 
@@ -71,14 +72,20 @@ class ReposController < ApplicationController
     #don't run this job if the repo already exists
     #if there is already a repo with this name in the db, we know
    
-      if !Repo.find_by_name(params[:repo][:name])
-        @repo = GithubWorker.perform_async(params[:repo][:owner_name], params[:repo][:name])
+      # if !Repo.find_by_name(params[:repo][:name])
+        owner = params[:repo][:owner_name]
+        repo_name = params[:repo][:name]
+        
+        repo = Repo.new(:owner_name => owner, :name => repo_name)
+        @repo = octokit_client.fetch_repo(repo)
+        @repo.save
+
         flash[:notice] = 'Your repository and corresponding issues are being processed, please check back shortly'
         redirect_to :root
-      else
-        flash[:error] = "Repository already exists."
-        redirect_to :root
-      end
+      # else
+      #   flash[:error] = "Repository already exists."
+      #   redirect_to :root
+      # end
     
 
     # respond_to do |format|

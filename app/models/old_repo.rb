@@ -1,5 +1,4 @@
 class Repo < ActiveRecord::Base
-
   extend FriendlyId
   friendly_id :name, :use => :slugged
   attr_accessible :description, :name, :open_issues, :owner_name, 
@@ -11,13 +10,27 @@ class Repo < ActiveRecord::Base
 
   validates :name, :uniqueness => true
 
-  def octokit_id
-    "#{self.owner_name}/#{self.name}"
+
+  # should only be called inside a sidekiq worker
+  def self.create_from_github(owner, repo)
+    # owner, repo = owner.strip, repo.strip
+    github_connection = GithubConnection.new(owner, repo)
+
+    newly_created_repo = Repo.create(:name => github_connection.name,
+                :open_issues => github_connection.open_issues,
+                :owner_name => github_connection.owner_name,
+                :watchers => github_connection.watchers,
+                :git_updated_at => github_connection.git_updated_at)
+
+    if newly_created_repo.persisted?
+      github_connection.issues.each do |issue|
+        Issue.create_from_github(owner, repo, issue.number)
+      end
+    end
+    newly_created_repo
   end
 
-  
-
-    def popularity
+  def popularity
     ((self.open_issues * 50) + self.watchers + (self.issues_comment_count * 20))/100
 
 
