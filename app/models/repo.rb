@@ -12,12 +12,11 @@ class Repo < ActiveRecord::Base
 
 
   # should only be called inside a sidekiq worker
-  def self.create_from_github(owner, repo, client)
+  def self.create_from_github(owner, repo, client = nil, issue = nil)
     owner, repo = owner.strip, repo.strip
 
     github_connection = GithubConnection.new(owner, repo, client)
     # github_connection = client.repo("#{owner}/#{repo}")
-    
 
     newly_created_repo = Repo.create(:name => github_connection.name,
                 :open_issues => github_connection.open_issues,
@@ -27,7 +26,8 @@ class Repo < ActiveRecord::Base
 
     if newly_created_repo.persisted?
       github_connection.issues.each do |issue|
-        Issue.create_from_github(owner, repo, issue.number)
+        debugger
+        Issue.create_from_github(github_connection, issue)
       end
     end
     newly_created_repo
