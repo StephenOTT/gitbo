@@ -2,8 +2,6 @@ class ReposController < ApplicationController
   # GET /repos
   # GET /repos.json
 
-  rescue_from Octokit::NotFound, :with => :repo_not_found
-
   def index
     @repos = Repo.all
     @repo_new = Repo.new
@@ -77,15 +75,18 @@ class ReposController < ApplicationController
         repo = Repo.new(:owner_name => owner, :name => repo_name,
                        :watchers => 0, :open_issues => 0 )
         repo.save
-        RepoWorker.perform_async(repo.id, current_user.token)
-
-        flash[:notice] = 'Your repository and corresponding issues are being processed, please check back shortly'
-        redirect_to :root
-
+        if repo.exists_on_github?(current_user.token)
+          RepoWorker.perform_async(repo.id, current_user.token)
+          flash[:notice] = 'Your repository and corresponding issues are being processed, please check back shortly'
+          redirect_to :root
+        else
+          flash_repo_not_found
+        end
       else
         flash[:error] = "Repository already exists."
         redirect_to :back
       end
+
     
 
     # respond_to do |format|
@@ -129,8 +130,8 @@ class ReposController < ApplicationController
 
   private
 
-  def repo_not_found
-    flash[:error] = "Repository not found. Please try again."
+  def flash_repo_not_found
+    flash[:error] = "Repository not found on Github. Check your spelling and try again."
     redirect_to :back
   end
 

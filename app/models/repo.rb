@@ -110,7 +110,17 @@ class Repo < ActiveRecord::Base
 
   def self.is_registered?(repo)
     Repo.find_by_owner_name_and_name(repo[:owner_name], repo[:name])
-  end 
+  end
+
+  def exists_on_github?(token)
+    begin
+      octokit_client = OctokitWrapper.new(token)
+      octokit_client.fetch_repo(self)
+    rescue Octokit::NotFound
+      return false
+    end
+      return true
+  end
 
 private
 
