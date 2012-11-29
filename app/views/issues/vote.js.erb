@@ -2,10 +2,19 @@
 // in that row, select the vote column
 // replace it's value with the value of @issue.net_votes
 // if (window.location.pathname == "/issues"){
+
 // if ($("tr#issue_<%= @issue.id %> td.votes").length > 0){
-  $("tr#issue_<%= @issue.id %> td.votes").html("<%= @issue.net_votes %>");  
-// } else {
-  $(".discussion-stats span.net_votes").html("<strong><%= @issue.net_votes %></strong> Scores");   
-    //change the color of buttons upon click 
-    // $("#upvote_issue").removeClass().addClass('btn btn-warning');
+  $("tr#issue_<%= @issue.id %> td.votes").html("<%= @issue.net_votes %>");
+  
+  // $("#index_upvote_icon_<%= @issue.id %>").toggleClass('icon-arrow-up icon-circle-arrow-up') ;
+
+  // $("#index_downvote_icon_<%= @issue.id %>").toggleClass('icon-arrow-down icon-circle-arrow-down');
+  
+// else {
+  $(".discussion-stats span.net_votes").html("<strong><%= @issue.net_votes %></strong> Score");   
+      
 // })
+
+click(function (e) {
+  $(this).toggleClass('icon-arrow-up icon-circle-arrow-up');
+})

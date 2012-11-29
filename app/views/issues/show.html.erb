@@ -97,7 +97,7 @@
            Upvote Issue
         <% end %></td><br />
         <br />
-         <td><%= link_to vote_issue_path(@issue.id, :downvote), :method => :put, :class => "btn", remote: true do %>
+         <td><%= link_to vote_issue_path(@issue.id, :downvote), :method => :put, :class => "btn", :id => "downvote_issue", remote: true do %>
             Downvote Issue
         <% end %></td>
         <% else %>

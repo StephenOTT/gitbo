@@ -1,15 +1,19 @@
 <div class="user_vote_table">
-  <% if current_user %>
-    <td>
-      <%= link_to vote_issue_path(issue.id, :upvote), :method => :put, remote: true do %>
-            <i class="icon-arrow-up"></i>
+ <% if current_user %>
+    <td class="parent_class">
+        <span><%= link_to vote_issue_path(issue.id, :upvote), :method => :put, :class => "upvote", remote: true do %></span>
+        <i id="index_upvote_icon_<%= issue.id %>" class="icon-arrow-up"></i>
       <% end %><br />
-      <%= link_to vote_issue_path(issue.id, :downvote), :method => :put, remote: true do %>
-          <i class="icon-arrow-down"></i>
+      
+        <span><%= link_to vote_issue_path(issue.id, :downvote), :method => :put, :class => "downvote", remote: true do %></span>
+        <i id="index_downvote_icon_<%= issue.id %>" class="icon-arrow-down"></i>
+        <!-- <i id="index_downvote_icon_<%#= issue.id %>" class="icon-circle-arrow-down"></i> -->
       <% end %>
-    </td>
   <% else %>
-      <td id="vote-prompt" href="#login-prompt" data-toggle="modal"><i class="icon-arrow-up"></i><br />
-      <i class="icon-arrow-down"></i></td>
+      <td id="vote-prompt" href="#login-prompt" data-toggle="modal">
+        <i class="icon-arrow-up"></i><br />
+        <i class="icon-arrow-down"></i></td>
   <% end %>
+   </td>
+
 </div>
