@@ -15,15 +15,17 @@
         <span class="label label-success">Post a bounty</span>
          <% end %></td>
       <% else %>
-          <td><%= link_to owner_repo_gitnumber_path(issue.repo_owner, issue.repo_name, issue.git_number) do %>
-              <span class="label label-warning"><%= number_to_currency(issue.bounty_total, :raise => true, :precision => 0)%></span>
-          <% end %></td>
+        <td>
+          <%= link_to owner_repo_gitnumber_path(issue.repo_owner, issue.repo_name, issue.git_number) do %>
+            <span class="label label-warning"><%= number_to_currency(issue.bounty_total, :raise => true, :precision => 0)%></span>
+          <% end %>
+        </td>
       <% end %>
     <% else %>
       <% if issue.bounty_total ==  0 %>
-         <td href="#login-prompt" data-toggle="modal"><span id="bounty-prompt" class="label label-success">Post a bounty</span></td>
+        <td href="#login-prompt" data-toggle="modal"><span id="bounty-prompt" class="label label-success">Post a bounty</span></td>
       <% else %>
-          <td href="#login-prompt" data-toggle="modal"><span id="bounty-prompt" class="label label-warning"><%= number_to_currency(issue.bounty_total, :raise => true, :precision => 0)%></span></td>
+        <td href="#login-prompt" data-toggle="modal"><span id="bounty-prompt" class="label label-warning"><%= number_to_currency(issue.bounty_total, :raise => true, :precision => 0)%></span></td>
     <% end %>
   <% end %>
     <% if issue.owner_endorsement == 1 %>

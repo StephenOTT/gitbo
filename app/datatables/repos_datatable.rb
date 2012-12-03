@@ -9,7 +9,7 @@ class ReposDatatable
     {
       sEcho: params[:sEcho].to_i,
       iTotalRecords: Repo.count,
-      iTotalDisplayRecords: repos.length,
+      iTotalDisplayRecords: repos.total_entries,
       aaData: data
     }
   end

@@ -61,7 +61,7 @@ class IssuesController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @issues }
+      format.json { render json: IssuesDatatables.new(view_context) }
       format.js {}
     end
   end
