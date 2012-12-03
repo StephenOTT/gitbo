@@ -27,7 +27,7 @@
               <td><script src="https://button.stripe.com/v1/button.js" class="stripe-button"
                 data-key="pk_NjMf2QUPtR28Wg0xmyWtepIzUziVr"></script></td>
               <% else %>
-              <td><button class='btn'>Waiting to be solved</button></td>
+              <td><span class="label">Waiting to be solved</span></td>
               <!-- <td><button id="bounty-payment-prompt" class="btn btn-success btn-small" href="#bounty-payment" data-toggle="modal">Pay</button></td> -->
               <% end %>
             <td><%= link_to bounty.issue.repo_owner, owner_repos_path(bounty.issue.repo_owner) %>/<%= link_to bounty.issue.repo_name, owner_repo_path(bounty.issue.repo_owner, bounty.issue.repo_name) %></td>

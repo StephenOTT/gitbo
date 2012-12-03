@@ -55,6 +55,11 @@ $('#downvote_issue').click(function(){
       event.preventDefault();
       $('span#error').replaceWith('<span class="label label-important">Please Enter The Same Value</span>');
     }
+
+    if(parseInt(modal) >= 5000){
+      event.preventDefault();
+      $('span#error').replaceWith('<span class="label label-important">That is a lot of Moola! Please enter something more realistic.</span>');
+    }
     
   }));
 }

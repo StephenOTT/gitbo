@@ -33,6 +33,36 @@
   padding: 5px 20px 5px;
 }
 
+.nav .user-avatar {
+  padding: 0px;
+  img {
+    border-radius: 3px;
+    height: 40px;
+    width: 40px;
+    margin-left: 10px;
+  }
+  a {
+    padding: 0;
+  }
+}
+
+.navbar .left-nav{
+  padding-top: 20px;
+}
+
+.user-nickname {
+  text-align: center;
+  padding-top: 5px;
+}
+
+.navbar .nav > li.user-nickname > a {
+  padding: 0px 15px 0px;
+}
+
+.navbar .nav > li.user-avatar > a {
+  padding: 5px 0 0 0 ;
+}
+
 .input-medium search-query {
   padding: 10 px;
 }

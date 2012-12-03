@@ -42,7 +42,7 @@ class Issue < ActiveRecord::Base
   end
 
   def popularity
-    self.popularity_github * self.popularity_gitbo
+    (self.popularity_github * self.popularity_gitbo * 10).to_i
   end
 
   def popularity_github

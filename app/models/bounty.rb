@@ -3,6 +3,6 @@ class Bounty < ActiveRecord::Base
   belongs_to :issue
   belongs_to :user
 
-  validates :price, :presence => true, :numericality => { :only_integer => true }
+  validates :price, :presence => true, :numericality => { :less_than => 5000 }
   
 end

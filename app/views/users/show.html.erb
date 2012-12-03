@@ -1,9 +1,4 @@
-<div class="span12">
-    <h3 class="pull-right"><a class="btn btn-info btn-small" href="http://www.github.com/<%= @user.nickname %>" target="blank">View owner on <i class='icon-github'></i></a></h3>
-    </div>
-</div>
-
-<h3><%= @user.nickname %>'s Bounties</h3>
+<h3 class="non-reg-user-header"><%= @user.nickname %>'s Bounties</h3>
 
 <p id="notice"><%= notice %></p>
 
@@ -13,39 +8,19 @@
   </div>
 <% end %>
 
-  <table class="table table-hover">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Popularity</th>
-      <th>Open Issues</th>
-      <th>Watchers</th>
-      <th>Issues Comment Count</th>
-    </tr>
-  </thead> 
-  <% @repos.each do |repo| %>
-  <tr>
-    <td><%= link_to repo.name, owner_repo_path(repo.owner_name, repo.name) %></td>
-    <td><%= repo.popularity %></td>
-    <td><%= repo.open_issues %></td>
-    <td><%= repo.watchers %></td>
-    <td><%= repo.issues_comment_count %></td>
-  </tr>
-  <% end %>
-</table>
-
   <div class="span9">
     <ul class="nav nav-tabs" id="myTab">
-      <li><a href="#user-repos" data-toggle="tab">Repos on Gitbo</a>
+      <li class="active"><a href="#user-repos" data-toggle="tab">Gitbo Repos</a>
       </li>
-      <li class="active"><a href="#user-bounties" data-toggle="tab">Bounties on their repos</a></li>
+      <!-- <li><a href="#user-bounties" data-toggle="tab">Bounties on their repos</a></li> -->
       <li><a href="#following" data-toggle="tab">Following</a></li>
       <li><a href="#starred" data-toggle="tab">Starred</a></li>
+      <a class="btn btn-info btn-small" style="float:right;" href="http://www.github.com/<%= @user.nickname %>" target="blank">View owner on <i class='icon-github'></i></a>
     </ul>
 
     <div class="tab-content">
-      <div class="tab-pane" id="user-repos"><%= render 'repos/repos-table' %></div>
-      <div class="tab-pane active" id="user-bounties">TODO: add bounties other people have issued for this user</div>
+      <div class="tab-pane active" id="user-repos"><%= render 'repos/repos-table' %></div>
+      <!-- <div class="tab-pane" id="user-bounties"></div> -->
       
       <div class="tab-pane" id="following"><%= render 'following' %></div>
       <div class="tab-pane" id="starred"><%= render 'starred' %></div>

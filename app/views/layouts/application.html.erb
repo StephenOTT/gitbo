@@ -27,7 +27,7 @@
             <span class="icon-bar"></span>
           </a> -->
           <div class="container nav-collapse">
-            <ul class="nav">
+            <ul class="nav left-nav">
               <li><%= link_to "Gitbo", root_path, :class => "brand" %></li>
               <li><%= link_to "Issues", issues_path  %></li>
               <li><%= link_to "Repos", repos_path  %></li>
@@ -40,6 +40,7 @@
                   <%= link_to image_tag(current_user.image), owner_repos_path(current_user.nickname) %>
                 </li>
                 <li class='user-nickname'>
+                  <%= link_to 'View Profile', owner_repos_path(current_user.nickname) %>
                   <%= link_to current_user.nickname, owner_repos_path(current_user.nickname) %>
                   </li>
                 <li><%= link_to "Sign Out", signout_path, :class => 'btn btn-mini' %></li>
@@ -58,9 +59,11 @@
 
     <div class=" container container-narrow">
       <div class="row">
+
         <div class="span12">
           <div class="row">
           </div>
+
          <%= yield %>
         </div>
       </div><!--/row-->
