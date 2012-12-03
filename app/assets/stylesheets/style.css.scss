@@ -38,19 +38,18 @@
 }
 
 #endorsement {
-    border-radius: 50%;
-    width: 100px; height: 100px;
+    width: 110px; height: 40px;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
     text-align: center;
-    line-height: 86px;
+    line-height: 36px;
     margin-top: 20px;
     margin-bottom: 20px;
   }
 
 .discussion-sidebar {
   float: right;
-  width: 100px;
+  width: 110px;
 }
 
 .issue-head {
@@ -80,6 +79,11 @@ a:focus, .navbar .nav > li > a.btn:hover {
  
   background-color: #E6E6E6;
   background-position: 0 -15px;
+}
+
+div.vote a {
+  width: 110px;
+  padding: 0px 0px;
 }
 
 

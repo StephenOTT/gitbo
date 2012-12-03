@@ -33,7 +33,7 @@
     <div id="refresh" class='btn btn-info'>Refresh</div>​
   </div>
 <div class="row">
-  <div class ='span8'>
+  <div class='span8'>
     <h3><%= link_to @issue.repo_owner, owner_repos_path(@issue.repo_owner) %> / <%= link_to @issue.repo_name, owner_repo_path(@issue.repo_owner, @issue.repo_name) %></h3>
     <h4>Issue # <%= @issue.git_number %></h4>
   </div>
@@ -64,16 +64,15 @@
 </div>
 
 <div id="bounty_div">
-<% if @issue.bounties.count == 0 %>
-    <div class='span12' id="no_bounty">
-    <p>There are currently no bounties for this issue. <%= link_to "Be the first to issue a bounty", 'javascript:focusBountyForm();' %></p>
-  </div>
-  <% else %>
-    <%= render 'bounties/bounties_table', :issue => @issue, remote: true %>
-<% end %>
+  <% if @issue.bounties.count == 0 %>
+      <div class='span12' id="no_bounty">
+      <p>There are currently no bounties for this issue. <%= link_to "Be the first to issue a bounty", 'javascript:focusBountyForm();' %></p>
+    </div>
+    <% else %>
+      <%= render 'bounties/bounties_table', :issue => @issue, remote: true %>
+  <% end %>
 </div>
 
-  
 <div class='clearfix'></div>
 
 <div id="show_issue">
@@ -82,42 +81,44 @@
       <span class="icon-arrow-left"></span>
       <%= link_to 'View All Issues', owner_repo_path %>
     </span>
-    <span class="number pull-right">Issue # <strong><%= @issue.git_number %></strong></span>
+    <span class="number pull-right">Issue # <strong><%= @issue.git_number %></strong></span><br />
   </div>
+</div>
 
-<!-- sidebar with badge and stats-->
+  <!-- sidebar with badge and stats-->
 
-  <div class="discussion-sidebar" class="span2">
-    <div class="discussion-stats">
-      <span class="endorsement">
-        <% if @issue.owner_endorsement == 1 %>
-          <span id="endorsement" class="badge badge-success">Endorsed</span>
-        <% elsif @issue.owner_endorsement == -1 %>
-          <span id="endorsement" class="badge badge-important">Not Endorsed</span>          
-        <% else %>
-          <span id="endorsement" class="badge">Not Yet</span>
+  <div class="discussion-sidebar">
+    <div class="span2">
+      <div class="discussion-stats">
+        <span class="endorsement">
+          <% if @issue.owner_endorsement == 1 %>
+            <span id="endorsement" class="badge badge-success">Endorsed</span>
+          <% elsif @issue.owner_endorsement == -1 %>
+            <span id="endorsement" class="badge badge-important">Not Endorsed</span>          
+          <% else %>
+            <span id="endorsement" class="badge">Not Yet Endorsed</span>
+          <% end %>
+        </span>
+        <br />
+        <span><strong><%= pluralize @issue.comment_count, "comment" %></strong></span><br />
+        <span class="net_votes"><strong><%= pluralize @issue.vote_count, "vote" %></strong></span>
+        <hr>
+      </div>
+      <div class="difficulty">
+        <% if @difficulty %>
+        <%= render :partial => 'issues/difficulty_message', :locals => { :issue => @issue } %>
         <% end %>
-      </span>
-        
-      <span><strong><%= @issue.comment_count %></strong> Comments<span><br />
-      <span class="net_votes"><strong><%= @issue.vote_count %></strong> Score </span>
-    </div>
+      </div>
+      <br />
       <hr>
-      
-
       <div class="vote">
         <%= render :partial => 'vote_button_logic', :locals => { :issue => @issue } %>
       </div>
-
-
-     <hr>
-    <% if @difficulty %>
-      <%= render :partial => 'issues/difficulty_message', :locals => { :issue => @issue } %>
-    <% end %>
+    </div>
   </div>
-
-  
+   
   <!-- main block with description and comments -->
+  <div class="issue-body">
     <div class='span10'>
       <div class='row'>
         <div class="issue-bubble">
@@ -139,33 +140,32 @@
           </div>  
         </div>
       </div>
-
-    <% @issue.comments.each do |comment| %>
       <div class='row'>
-        <div class='comment-container'>
-          <img src="<%= comment.owner_image %>" class='comment-avatar'>
-          <div class='comment-content bubble'>
-            <div class='content-container-inner'>
-              <div class='comment-header'>
-                <div class='comment-author'>
-                  <p><%= comment.owner_name %></p>
+        <% @issue.comments.each do |comment| %>
+          <div class='comment-container'>
+            <img src="<%= comment.owner_image %>" class='comment-avatar'>
+            <div class='comment-content bubble'>
+              <div class='content-container-inner'>
+                <div class='comment-header'>
+                  <div class='comment-author'>
+                    <p><%= comment.owner_name %></p>
+                  </div>
+                  <div class='pull-right header-date'>
+                    <% if comment.git_update_at %>
+                    <time><%= time_ago_in_words(comment.git_update_at) %> ago</time>
+                    <% end %>
+                  </div>
                 </div>
-                <div class='pull-right header-date'>
-                  <% if comment.git_update_at %>
-                  <time><%= time_ago_in_words(comment.git_update_at) %> ago</time>
+                <div class='comment-content'>
+                  <% if comment.body %>
+                  <p><%= markdown comment.body %></p>
                   <% end %>
                 </div>
               </div>
-              <div class='comment-content'>
-                <% if comment.body %>
-                <p><%= markdown comment.body %></p>
-                <% end %>
-              </div>
             </div>
           </div>
-        </div>
+        <% end %>
       </div>
-      <% end %>
       <div class='row'>
         <div class='comment-container'>
           <% if current_user %>
@@ -178,13 +178,15 @@
                   </div>
                 </div>
               </div>
-            <% end %>
-          </div>
+            </div>
+          <% end %>
         </div>
       </div>
     </div>
-  </div>    
-</div>
+  </div>
+
+
+  
 
 <script type="text/javascript">
 

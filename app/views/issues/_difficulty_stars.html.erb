@@ -1,9 +1,11 @@
-<%= form_tag(difficulty_rating_path(@issue.id), :method => "put", :remote => true ) do %>    
-  <fieldset class="rating">
-    <span> How hard ? </span>
-      <!-- {:impossible => {:title => "Impossible!", :value => 5}, } -->
-      <% 5.downto(1).each do |i| %>
-        <input type="radio" id="star<%= i %>" name="rating" value="<%= i %>" <%= "checked='checked'" if @difficulty == i %>/><label for="star<%= i %>"><%= i %> stars</label>
-      <% end %>
-  </fieldset>
-<% end %>
+<span><strong> Difficulty </strong></span><br />
+<span class="pull-left">
+  <%= form_tag(difficulty_rating_path(@issue.id), :method => "put", :remote => true ) do %>    
+    <fieldset class="rating">
+    <!-- {:impossible => {:title => "Impossible!", :value => 5}, } -->
+    <% 5.downto(1).each do |i| %>
+      <input type="radio" id="star<%= i %>" name="rating" value="<%= i %>" <%= "checked='checked'" if @difficulty == i %>/><label for="star<%= i %>"><%= i %> stars</label>
+    <% end %>
+    </fieldset>
+  <% end %>
+</span>

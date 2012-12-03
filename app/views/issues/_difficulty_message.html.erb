@@ -10,8 +10,8 @@
   <% when owner_rated_but_no_users(@issue) %>
    The owner says this is a <strong><%= UserVote.owner_rating(@issue) %><strong>
 
-  <% when neither(@issue) %>
-   Be the first to vote on the difficulty of this issue.
+  <%# when neither(@issue) %>
+   <!-- Be the first to vote on the difficulty of this issue. -->
   <% end %>
 
 <%= render :partial => 'issues/difficulty_stars', :locals => { :issue => @issue } %>
