@@ -42,15 +42,16 @@ class Issue < ActiveRecord::Base
   end
 
   def popularity
-    (self.popularity_github * self.popularity_gitbo * 10).to_i
+    # (self.popularity_github * self.popularity_gitbo).to_i
+    (popularity_gitbo*100).to_i
   end
 
   def popularity_github
-    (self.comment_count*self.repo.popularity)/10
+    ((self.comment_count + 1)*self.repo.popularity)
   end
 
   def popularity_gitbo
-    (self.net_votes+1.0)/(self.time_since_submission + 2)**1.5
+    (self.net_votes + 2.0)**0.4/(self.time_since_submission + 2.0)**1.5
   end
 
   def time_since_submission

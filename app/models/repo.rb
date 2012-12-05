@@ -79,7 +79,7 @@ class Repo < ActiveRecord::Base
   end 
 
   def popularity
-    ((self.open_issues * 50) + self.watchers + (self.issues_comment_count * 20))/100
+    ((self.open_issues * 50) + self.watchers + 1 + (self.issues_comment_count * 20))
 
 
     # what factors into a popularity score
